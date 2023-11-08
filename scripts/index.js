@@ -8,7 +8,7 @@ function createCard (item, removeCard) {
   cardElement.querySelector('.card__title').textContent = item.name;
   cardElement.querySelector('.card__delete-button').addEventListener('click', removeCard);
   cardElement.querySelector('.card__image').src = item.link;
-  cardElement.querySelector('.card__image').alt = item.name;
+  cardElement.querySelector('.card__image').alt = `Фотография ${item.name}`;
   return cardElement;
 }
 // @todo: Функция удаления карточки
