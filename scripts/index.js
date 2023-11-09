@@ -12,10 +12,9 @@ function createCard (item, removeCard) {
   return cardElement;
 }
 // @todo: Функция удаления карточки
-function removeCard () {
-  const removeBtn = document.querySelector('.card__delete-button');
-  removeBtn.closest('.card').remove();
-}
+function removeCard (event) {
+  event.target.closest('.card').remove();
+  }
 // @todo: Вывести карточки на страницу
 initialCards.forEach(function(item) {
   const card = createCard(item, removeCard);
