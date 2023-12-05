@@ -1,5 +1,6 @@
 import '../pages/index.css';
-import { createCard, removeCard, initialCards, likeCard } from "./cards.js";
+import { createCard, removeCard, likeCard } from "./card.js";
+import { initialCards } from "./cards.js";
 import { openModal, closeModal } from "./modal.js";
 export const cardTemplate = document.querySelector('#card-template').content;
 export const cardList = document.querySelector('.places__list');
@@ -12,9 +13,9 @@ const imgInModal = document.querySelector('.popup__image');
 const imgCaption = document.querySelector('.popup__caption');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__description');
-const formElement = document.forms.edit_profile;
-const nameInput = formElement.name;
-const jobInput = formElement.description;
+const formElementUser = document.forms.edit_profile;
+const nameInput = formElementUser.name;
+const jobInput = formElementUser.description;
 const formElementPlace = document.forms.new_place;
 const placeName = formElementPlace.place_name;
 const placeLink = formElementPlace.link;
@@ -35,20 +36,19 @@ function handleFormSubmit (event) {
 function handleFormPlace (event) {
   event.preventDefault();
   const userCard = createCard({name: placeName.value, link: placeLink.value}, removeCard, likeCard, openCard);
-  imgInModal.src = placeLink.value;
-  imgInModal.alt = placeName.value;
-  imgCaption.textContent = placeName.value;
   cardList.prepend(userCard);
   closeModal(addModal);
   formElementPlace.reset();
 }
 
 function openCard (event) {
-  if(event.target.classList.contains('card__image')) {
+    imgInModal.src = placeLink.value;
+    imgInModal.alt = placeName.value;
+    imgCaption.textContent = placeName.value;
     imgInModal.src = event.target.src;
+    imgInModal.alt = `Фотография ${event.target.alt}`;
     imgCaption.textContent = event.target.alt;
     openModal(imgModal);
-  }
 }
 
 btnEditProfile.addEventListener('click', () => {
@@ -61,5 +61,5 @@ btnAddCard.addEventListener('click', () => {
   openModal(addModal);
 })
 
-formElement.addEventListener('submit', handleFormSubmit);
+formElementUser.addEventListener('submit', handleFormSubmit);
 formElementPlace.addEventListener('submit', handleFormPlace);

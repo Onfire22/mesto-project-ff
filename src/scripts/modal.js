@@ -5,7 +5,7 @@
 export function openModal (modal) {
   modal.classList.add('popup_is-opened');
   window.addEventListener('keydown', closeEsc);
-  window.addEventListener('click', closeOverlay);
+  modal.addEventListener('click', closeOverlay);
   const btnClose = modal.querySelector('.popup__close');
   btnClose.addEventListener('click', () => {
     closeModal(modal);
@@ -15,6 +15,7 @@ export function openModal (modal) {
 export function closeModal (modal) {
   modal.classList.remove('popup_is-opened');
   window.removeEventListener('keydown', closeEsc);
+  window.removeEventListener('click', closeOverlay);
 }
 
 function closeEsc (event) {
@@ -25,7 +26,7 @@ function closeEsc (event) {
 }
 
 function closeOverlay (event) {
-  if(event.target.classList.contains('popup_is-opened')) {
-    event.target.classList.remove('popup_is-opened');
+  if(event.target.classList.contains('popup_is-opened' || event.currentTarget.classList.contains('popup__close'))) {
+    closeModal(event.currentTarget);
   }
 }
