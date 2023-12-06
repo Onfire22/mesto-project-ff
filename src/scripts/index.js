@@ -42,9 +42,6 @@ function handleFormPlace (event) {
 }
 
 function openCard (event) {
-    imgInModal.src = placeLink.value;
-    imgInModal.alt = placeName.value;
-    imgCaption.textContent = placeName.value;
     imgInModal.src = event.target.src;
     imgInModal.alt = `Фотография ${event.target.alt}`;
     imgCaption.textContent = event.target.alt;
